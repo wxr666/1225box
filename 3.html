@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            list-style:none;
+        }
+        ul{
+            margin-top:20px;
+        }
+        input,button{
+            margin:10px 20px;
+        }
+        .box{
+            width: 300px;
+            height: 200px;
+            background:skyblue;
+            position:absolute;
+            left:40%;
+            top:40%;
+            border-radius:10px;
+            z-index:10;
+        }
+        .wrap{
+            position:absolute;
+            z-index:9;
+        }
+        span{
+            float:right;
+            margin:10px 30px;
+            font-size:30px;
+            font-weight:bold;
+        }
+        b{
+          margin-left:30px;
+          line-height: 50px;
+        }
+    </style>
+</head>
+<body>
+   <ul>
+       <li><input type="checkbox" name="">连衣裙</li>
+       <li><input type="checkbox" name="">牛仔外套</li>
+       <li><input type="checkbox" name="">文艺衬衫</li>
+       <li><input type="checkbox" name="">阔腿裤</li>
+       <li><input type="checkbox" name="">牛仔裙</li>
+   </ul>
+   <button id='btn'>按钮</button>
+   <script>
+       var input=document.getElementsByTagName('input');
+        var w=document.documentElement.clientWidth||document.body.clientWidth;
+        var h=document.documentElement.clientHeight||document.body.clientHeight;
+        num=5;
+        btn.onclick=function(){
+            for(var i=0;i<input.length;i++){
+                if(!input[i].checked){
+                   num--;
+                }
+               }
+               if(num<=0){
+                var div1=document.createElement('div');
+                var div2=document.createElement('div');
+                div1.className='wrap';
+                div2.className='box';
+                document.body.appendChild(div1);
+                document.body.appendChild(div2);
+                var box=document.getElementsByClassName('box')[0];
+                var wrap=document.getElementsByClassName('wrap')[0];
+                wrap.style.width=w+'px';
+                wrap.style.height=h+'px';
+                wrap.style.background='rgba(0,0,0,0.6)';
+                wrap.style.left=0;
+                wrap.style.top=0;
+                var b=document.createElement('b');
+                var span=document.createElement('span');
+                b.innerHTML='请选择至少一件商品';
+                span.innerHTML='X';
+                box.appendChild(b);
+                box.appendChild(span);
+                var span=document.getElementsByTagName('span')[0];
+                span.onclick=function(){
+                  wrap.style.display='none';
+                  box.style.display='none';
+                }
+                box.onmousedown=function(ev){
+                 var ev=ev||window.event;
+                 downX=ev.clientX-this.offsetLeft;
+                 downY=ev.clientY-this.offsetTop;
+                 var w=document.documentElement.clientWidth||document.body.clientWidth;
+                 var h=document.documentElement.clientHeight||document.body.clientHeight;
+                 document.onmousemove=function(ev){
+                  var ev=ev||window.event;
+                  moveX=ev.clientX-downX;
+                  moveY=ev.clientY-downY;
+                  if(moveX<0){
+                      moveX=0;
+                  }else if(moveX>w-box.offsetWidth){
+                      moveX=w-box.offsetWidth;
+                  }
+                  if(moveY<0){
+                      moveY=0;
+                  }else if(moveY>h-box.offsetHeight){
+                      moveY=h-box.offsetHeight;
+                  }
+                  box.style.left=moveX+'px';
+                  box.style.top=moveY+'px';
+                 }
+                 document.onmouseup=function(){
+                  document.onmousemove=null;
+                 }
+              }
+           }
+        }
+
+   </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            list-style:none;
+        }
+        p{
+            width: 150px;
+            height: 30px;
+            text-align:center;
+            line-height:30px;
+            border:2px solid #009900;
+            background:#009900;
+            color:white;
+        }
+        ul{
+            display:none;
+        }
+        ul li{
+            width: 150px;
+            text-align:center;
+            padding:5px 0;
+            border:2px solid #009900;
+            border-bottom:none;
+        }
+        ul li:last-child{
+            border-bottom:2px solid #009900;
+        }
+    </style>
+</head>
+<body>
+   <div id='box'>
+       <p>COLOR分类</p>
+       <ul>
+           <li id='#009060'>湖蓝色</li>
+           <li id='#009999'>绿色</li>
+           <li id='skyblue'>蓝色</li>
+           <li id='pink'>粉色</li>
+           <li id='green'>深绿色</li>
+       </ul>
+   </div>
+   <script>
+       var ul=document.getElementsByTagName('ul')[0];
+       var li=document.getElementsByTagName('li');
+       var p=document.getElementsByTagName('p')[0];
+       /*p.addEventListener('click',function(ev){
+           var ev=ev||window;
+            if(ev.stopPropagation){
+                ev.stopPropagation();
+            }else{
+                ev.cancelBubble=true;
+            }
+            ul.style.display='block';
+       },false);*/
+       /*for(var i=0;i<li.length;i++){
+        li[i].setAttribute('index',i);
+        li[i].addEventListener('click',function(ev){
+            var ev=ev||window;
+            if(ev.stopPropagation){
+                ev.stopPropagation();
+            }else{
+                ev.cancelBubble=true;
+            }
+            ul.style.display='block';
+            var ind=this.getAttribute('index');
+            document.body.style.background=li[ind].id;
+        },false);
+       }*/
+       /*document.body.onclick=function(){
+        ul.style.display='none';
+       }*/
+       box.onclick=function(ev){
+        var ev=ev||window.event;
+        var tar=ev.target||ev.srcElement;
+        if(tar.tagName==='P'){
+           ul.style.display='block';
+        }
+        if(tar.tagName==='LI'){
+            document.body.style.background=tar.id;
+        }
+       }
+   </script>
+</body>
+</html>
